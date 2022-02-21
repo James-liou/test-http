@@ -6,23 +6,23 @@ items:
   metadata:
     labels:
       app: kylie-fan-club
-      app.kubernetes.io/component: kylie-fan-club
-      app.kubernetes.io/instance: kylie-fan-club
-    name: kylie-fan-club
+      app.kubernetes.io/component: test-http
+      app.kubernetes.io/instance: test-http
+    name: test-http
   spec:
     replicas: 3
     revisionHistoryLimit: 10
     selector:
-      deploymentconfig: kylie-fan-club
+      deploymentconfig: test-http
     template:
       metadata:
         labels:
-          deploymentconfig: kylie-fan-club
+          deploymentconfig: test-http
       spec:
         containers:
-        - image: kylie-fan-club
+        - image: test-http
           imagePullPolicy: Always
-          name: kylie-fan-club
+          name: test-http
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -37,24 +37,24 @@ items:
         - kylie-fan-club
         from:
           kind: ImageStreamTag
-          name: kylie-fan-club:test
+          name: test-http:test
       type: ImageChange
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
     labels:
-      app: kylie-fan-club
-      app.kubernetes.io/component: kylie-fan-club
-      app.kubernetes.io/instance: kylie-fan-club
-    name: kylie-fan-club
+      app: test-http
+      app.kubernetes.io/component: test-http
+      app.kubernetes.io/instance: test-http
+    name: test-http
 - apiVersion: route.openshift.io/v1
   kind: Route
   metadata:
     labels:
-      app: kylie-fan-club
-      app.kubernetes.io/component: kylie-fan-club
-      app.kubernetes.io/instance: kylie-fan-club
-    name: kylie-fan-club
+      app: test-http
+      app.kubernetes.io/component: test-http
+      app.kubernetes.io/instance: test-http
+    name: test-http
   spec:
     port:
       targetPort: 8080-tcp
@@ -62,6 +62,6 @@ items:
       termination: edge
     to:
       kind: Service
-      name: kylie-fan-club
+      name: test-http
       weight: 100
     wildcardPolicy: None
